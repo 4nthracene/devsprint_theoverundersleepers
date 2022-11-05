@@ -6,9 +6,13 @@ const userDef = new mongoose.Schema({
         type: String,
         required: true
     },
-    bio: {
+    email: {
         type: String,
         required: true
+    },
+    bio: {
+        type: String,
+        default: "I'm anonymous :3"
     },
     topArtists: [],
     interests: [],
@@ -26,3 +30,4 @@ const userDef = new mongoose.Schema({
 });
 
 const userModel = mongoose.model("User", userDef);
+module.exports = userModel;
