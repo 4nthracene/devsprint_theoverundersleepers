@@ -1,1 +1,2 @@
-Subham Kumar Singh: SubhamKrSingh, Armaan Gupta: 4nthracene
+Subham Kumar Singh: @SubhamKrSingh
+Armaan Gupta: @4nthracene
