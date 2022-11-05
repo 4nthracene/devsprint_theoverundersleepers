@@ -32,8 +32,8 @@ const setLocation = async (req, res, next) => {
         },
       }
     );
-
-    User.findOneAndUpdate(
+    console.log(UserData.email, lat, lon);
+    await User.findOneAndUpdate(
       { email: UserData.email },
       { location: { type: "Point", coordinates: [lon, lat] } }
     );
@@ -52,6 +52,7 @@ const createProfile = async (req, res, next) => {
   const newUser = new User({
     name,
     email,
+    bio,
     location: {
       coordinates: [lon, lat],
     },
@@ -67,29 +68,30 @@ const createProfile = async (req, res, next) => {
 };
 
 const getNearbyUsers = async (req, res, next) => {
-  const { maxDist, lon, lat } = req.query;
+  const { maxDist, lon, lat } = req.body;
   try {
     const nearbyUsers = await User.find({
       location: {
         $near: {
-          $maxDistance: parseFloat(maxDist),
           $geometry: {
             type: "Point",
             coordinates: [lon, lat]
-          }
+          },
+          $maxDistance: 1000 * 1000
         }
       }
     });
+
     return res.json({
       nearbyUsers
     });
   } catch(e) {
-    console.log(e.message);
+    console.log(e);
     return res.json({
       message: `An error occured`,
       error: e.message
     });
   };
-}
+};
 
 module.exports = { getLocation, setLocation, createProfile, getNearbyUsers };

@@ -29,5 +29,7 @@ const userDef = new mongoose.Schema({
     }
 });
 
+userDef.index({ "location": "2dsphere" });
+
 const userModel = mongoose.model("User", userDef);
 module.exports = userModel;
