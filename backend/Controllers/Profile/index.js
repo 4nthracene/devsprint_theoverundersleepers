@@ -48,5 +48,48 @@ const setLocation = async (req, res, next) => {
 };
 
 const createProfile = async (req, res, next) => {
-  const { name, lon, lat, email, gender } = req.body;
+  const { name, lon, lat, email, bio } = req.body;
+  const newUser = new User({
+    name,
+    email,
+    location: {
+      coordinates: [lon, lat],
+    },
+  });
+  try {
+    const savedUser = await newUser.save();
+    return res.json({ message: `User Creation Successfull`, user: savedUser });
+  } catch(e) {
+    return res.json({
+      message: `An error occured while creating user`
+    });
+  };
 };
+
+const getNearbyUsers = async (req, res, next) => {
+  const { maxDist, lon, lat } = req.query;
+  try {
+    const nearbyUsers = await User.find({
+      location: {
+        $near: {
+          $maxDistance: parseFloat(maxDist),
+          $geometry: {
+            type: "Point",
+            coordinates: [lon, lat]
+          }
+        }
+      }
+    });
+    return res.json({
+      nearbyUsers
+    });
+  } catch(e) {
+    console.log(e.message);
+    return res.json({
+      message: `An error occured`,
+      error: e.message
+    });
+  };
+}
+
+module.exports = { getLocation, setLocation, createProfile, getNearbyUsers };
