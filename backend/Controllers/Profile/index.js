@@ -48,23 +48,29 @@ const setLocation = async (req, res, next) => {
 };
 
 const createProfile = async (req, res, next) => {
-  const { name, lon, lat, email, bio } = req.body;
-  const newUser = new User({
-    name,
-    email,
-    bio,
-    location: {
-      coordinates: [lon, lat],
-    },
-  });
+  const { lat, lon, userToken, bio, interests, socials } = req.body;
   try {
-    const savedUser = await newUser.save();
-    return res.json({ message: `User Creation Successfull`, user: savedUser });
-  } catch(e) {
+    const { data: UserData } = await axios.get(
+      "https://api.spotify.com/v1/me",
+      {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      }
+    );
+    console.log(UserData.email, lat, lon);
+    await User.findOneAndUpdate(
+      { email: UserData.email },
+      { location: { type: "Point", coordinates: [lon, lat] }, bio, interests, socials }
+    );
     return res.json({
-      message: `An error occured while creating user`
+      message: "Update went successfully.",
     });
-  };
+  } catch (e) {
+    return res.json({
+      message: `Something went wrong.`,
+    });
+  }
 };
 
 const getNearbyUsers = async (req, res, next) => {
@@ -75,23 +81,23 @@ const getNearbyUsers = async (req, res, next) => {
         $near: {
           $geometry: {
             type: "Point",
-            coordinates: [lon, lat]
+            coordinates: [lon, lat],
           },
-          $maxDistance: 1000 * 1000
-        }
-      }
+          $maxDistance: 1000 * 1000,
+        },
+      },
     });
 
     return res.json({
-      nearbyUsers
+      nearbyUsers,
     });
-  } catch(e) {
+  } catch (e) {
     console.log(e);
     return res.json({
       message: `An error occured`,
-      error: e.message
+      error: e.message,
     });
-  };
+  }
 };
 
 module.exports = { getLocation, setLocation, createProfile, getNearbyUsers };

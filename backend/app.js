@@ -12,6 +12,7 @@ const Run = async () => {
     await PreRun();
     const port = process.env.PORT || 3000;
     const app = express();
+    app.use(cors());
     app.use(express.json());
     app.use(Routes)
     app.listen(port, () => {

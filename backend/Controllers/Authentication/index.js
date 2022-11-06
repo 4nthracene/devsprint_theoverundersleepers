@@ -72,7 +72,7 @@ async function CB(req, res, next) {
           },
         }
       );
-      const artistsIds = ArtistsData.items.map((x) => x.id);
+      const artistsIds = ArtistsData.items.map((x) => ({ id: x.id, images: x.images }));
       if (!(await User.findOne({ email: UserData.email }))) {
         const newUser = new User({
           email: UserData.email,
@@ -83,7 +83,7 @@ async function CB(req, res, next) {
         console.log(savedUser);
       }
 
-      return res.json({ data: data.data, artists: ArtistsData });
+      return res.redirect(`http://localhost:3002/cb?accessToken=${data.data.access_token}`);
     } catch (error) {
       console.log(error);
     }
@@ -129,5 +129,5 @@ module.exports = {
   postSignUp,
   Authenticate,
   CB,
-  refresh
+  refresh,
 };
