@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import Link from "next/link";
+import Image from "next/image"; 
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
@@ -24,10 +25,11 @@ export default function CompleteProfile() {
     }, []);
     const [bio, setBio] = useState("")
     return (
-        <div className="bg-black h-[100vh] w-[100vw] text-white p-5">
+        <div className="bg-black h-[100vh] w-[100vw] text-white p-5 flex flex-col items-center justify-center">
             <ToastContainer />
-            <h1 className="text-2xl font-extrabold mb-9">Complete Your Profile.</h1>
-            <div className="h-[90%] w-full">
+            <h1 className="text-3xl font-extrabold mb-9 uppercase">Complete Your Profile.</h1>
+            <div className="h-[90%] w-full flex flex-col items-center justify-center">
+                <div>
                 <h1 className="font-semibold text-lg">Add Your Interests.</h1>
                 <div>
                     { interests.map(x => {
@@ -74,7 +76,7 @@ export default function CompleteProfile() {
                         setBio(e.target.value)
                     }}
                 />
-                <button className="bg-pink-700 rounded-xl p-3 my-3 block w-[20%]" onClick={async() => {
+                <button className="bg-pink-700 rounded-xl p-3 my-3 block w-[100%]" onClick={async() => {
                     const data = await axios.post('http://localhost:3000/profile/new', {
                         bio: bio,
                         interests: interests,
@@ -89,7 +91,9 @@ export default function CompleteProfile() {
                     console.log(data.data)
                 }} >All done.</button>
 
-                <Link className="bg-green-700 rounded-xl p-3 my-3 block w-[20%] text-center" href="/">Go Back!</Link>
+                <Link className="bg-[#741f80] rounded-xl p-3 my-3 block w-[100%] text-center w-[100%]" href="/">Go Back!</Link>
+
+                </div>
             </div>
         </div>
     )

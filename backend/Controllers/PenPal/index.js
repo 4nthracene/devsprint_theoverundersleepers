@@ -3,6 +3,7 @@ const axios = require("axios");
 
 const assign = async (req, res, next) => {
     const { userToken } = req.body;
+    console.log(userToken);
     const { data: UserData } = await axios.get(
       "https://api.spotify.com/v1/me",
       {
@@ -14,7 +15,7 @@ const assign = async (req, res, next) => {
     const user = await User.findOne({ email: UserData.email });
     if(user.pal) {
         return res.json({
-            pal: user.pal
+            pal: `${user.pal}`
         });
     }
     console.log(User.count());
@@ -30,8 +31,9 @@ const assign = async (req, res, next) => {
     });
 };
 
-const post = async () => {
+const post = async (req, res, next) => {
     const { userToken, post } = req.body;
+    console.log("DOING")
     const { data: UserData } = await axios.get(
       "https://api.spotify.com/v1/me",
       {
@@ -45,10 +47,13 @@ const post = async () => {
         user.palPost = post;
         await user.save();
     }
+    return res.json({
+      message: 'Done'
+    })
 }
 
-const getPalsPost = async () => {
-    const { userToken, post } = req.body;
+const getPalsPost = async (req, res, next) => {
+    const { userToken } = req.body;
     const { data: UserData } = await axios.get(
       "https://api.spotify.com/v1/me",
       {
@@ -58,10 +63,10 @@ const getPalsPost = async () => {
       }
     );
     const user = await User.findOne({ email: UserData.email });
-    const pal = user.pal;
+    const pal = await User.findById(user.pal);
     return res.json({
-        pal
-    })
+      pal
+    });
 }
 
 module.exports = {
@@ -69,3 +74,5 @@ module.exports = {
     post,
     getPalsPost
 };
+
+// 090F2E

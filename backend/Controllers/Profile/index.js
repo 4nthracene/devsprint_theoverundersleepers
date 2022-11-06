@@ -32,7 +32,7 @@ const setLocation = async (req, res, next) => {
         },
       }
     );
-    console.log(UserData.email, lat, lon);
+    console.log(UserData);
     await User.findOneAndUpdate(
       { email: UserData.email },
       { location: { type: "Point", coordinates: [lon, lat] } }
