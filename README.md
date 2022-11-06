@@ -15,3 +15,4 @@ This helps them to leave their shell, form genuine social relationships and talk
 We believe everyone has a story and we refuse to let any of it die. With proxymate's software, the music interests connect two individuals.
 And additionally, the count on me helps them to have a non judgemental interaction with a stranger on the other side from where they can start a new friendship too.
 The comfort mail let's everyone enjoy the process of letter writing and the anticipation of a letter coming back from someone, to get out of their comfort zone.
+We aim to provide a safe shelter to anyone who thinks that they are alone in their fight.
