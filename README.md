@@ -1,6 +1,8 @@
 Subham Kumar Singh: @SubhamKrSingh
 Armaan Gupta: @4nthracene
 
+Interactive Visual Presentation: https://www.figma.com/proto/doE6Q71cbZ0XUWLLw2wa0H/My-Work?page-id=0%3A1&node-id=1827%3A1014&viewport=-11082%2C5260%2C0.4&scaling=min-zoom&starting-point-node-id=1827%3A1014
+
 Track:
 Student Community
 
@@ -16,3 +18,4 @@ We believe everyone has a story and we refuse to let any of it die. With proxyma
 And additionally, the count on me helps them to have a non judgemental interaction with a stranger on the other side from where they can start a new friendship too.
 The comfort mail let's everyone enjoy the process of letter writing and the anticipation of a letter coming back from someone, to get out of their comfort zone.
 We aim to provide a safe shelter to anyone who thinks that they are alone in their fight.
+We want you to be a little kinder and a little bolder today, knock on a friend's door, maybe they are thinking about you too.
